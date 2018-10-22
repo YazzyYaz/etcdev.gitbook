@@ -96,6 +96,53 @@ module.exports = {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
+## Run Emerald Vault
+
+Before running the Emerald TestRPC, we must first install Emerald Vault from [here](https://github.com/ETCDEVTeam/emerald-vault)
+
+A quick way to install it from source is to do the following:
+
+1) Make sure you have Rust installed, which can be done with the following command:
+
+```text
+$ curl https://sh.rustup.rs -sSf | sh
+```
+After you install it, add the following to line to your .bashrc file and source it in 
+order to have cargo added to your path `export PATH="$HOME/.cargo/bin:$PATH"`
+
+After you save it in your .bashrc file, type the following to restart your shell:
+```text
+source ~/.bashrc
+```
+
+When you type `cargo` in your terminal, now it should return a list of commands you can use.
+
+2) Now, we will proceed to installing Emerald Vault.
+
+Run the following command:
+```text
+$ git clone https://github.com/ETCDEVTeam/emerald-vault.git
+$ cd emerald-vault
+$ cargo build --release
+```
+
+This will take a while to compile, but it will install emerald-vault inside `emerald-vault/target/release`.
+Next, we run the following command to have it run from our local bin:
+```text
+$ cp emerald-vault/target/release/emerald-vault /usr/local/bin
+$ source ~/.bashrc
+```
+
+Now, if you type `emerald-vault -h` from any directory, it should return a list of options to choose.
+
+We then run the emerald-vault server with this command:
+```text
+$ emerald-vault -v server
+```
+
+We leave it running in the background. The `-v` flag is for verbose so that you can see the output 
+and the server connection established. It should be connecting to port 1920.
+
 ## Run Emerald TestRPC
 
 Within the DApp directory, run `emerald testrpc` to run a local test net Ethereum Classic blockchain
